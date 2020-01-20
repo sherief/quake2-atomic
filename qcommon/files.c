@@ -421,7 +421,7 @@ int FS_LoadFile (char *path, void **buffer)
 
 	FS_Read (buf, len, h);
 
-	fclose (h);
+	FS_FCloseFile (h);
 
 	return len;
 }
