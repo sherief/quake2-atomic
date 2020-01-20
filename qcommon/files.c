@@ -25,6 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #if Q2_ATOMIC
 #include "../win32/resource.h"
 #include <Windows.h>
+#include <ShlObj.h>
 #endif
 
 // define this to dissalow any data but the demo pak file
@@ -564,6 +565,7 @@ void FS_AddGameDirectory (char *dir)
 		int result = PHYSFS_mountMemory (GameData, GameDataSize, 0, "data.7z", 0, 0);
 		if (!result)
 			Sys_Error ("Failed to mount game data resource");
+		PHYSFS_mount (FS_Gamedir(), 0, 1);
 		return;
 	}
 #endif
@@ -605,8 +607,17 @@ FS_Gamedir
 Called to find where to write a file (demos, savegames, etc)
 ============
 */
+char dataPath[MAX_OSPATH];
+
 char *FS_Gamedir (void)
 {
+	char path[MAX_OSPATH];
+	if (SHGetSpecialFolderPathA(0, path, CSIDL_APPDATA, TRUE))
+	{
+		Com_sprintf(dataPath, MAX_OSPATH, "%s/Quake 2", path);
+		Sys_Mkdir(dataPath);
+		return dataPath;
+	}
 	if (*fs_gamedir)
 		return fs_gamedir;
 	else
