@@ -30,6 +30,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <io.h>
 #include <conio.h>
 #include "../win32/conproc.h"
+#include "../physfs/src/physfs.h"
 
 #define MINIMUM_WIN_MEMORY	0x0a00000
 #define MAXIMUM_WIN_MEMORY	0x1000000
@@ -99,6 +100,8 @@ void Sys_Quit (void)
 
 // shut down QHOST hooks if necessary
 	DeinitConProc ();
+
+	PHYSFS_deinit ();
 
 	exit (0);
 }
@@ -250,6 +253,11 @@ void Sys_Init (void)
 	
 		// let QHOST hook in
 		InitConProc (argc, argv);
+	}
+
+	if (!PHYSFS_init(0))
+	{
+		Sys_Error ("Couldn't initialize PhysFS");
 	}
 }
 
