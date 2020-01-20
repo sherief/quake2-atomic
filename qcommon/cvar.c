@@ -67,6 +67,7 @@ float Cvar_VariableValue (char *var_name)
 	var = Cvar_FindVar (var_name);
 	if (!var)
 		return 0;
+	fesetround(0); //FE_TONEAREST
 	return atof (var->string);
 }
 
