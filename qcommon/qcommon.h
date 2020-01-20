@@ -70,6 +70,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #endif
 
+#define Q2_ATOMIC 1
+
 //============================================================================
 
 typedef struct sizebuf_s
@@ -692,7 +694,12 @@ FILESYSTEM
 ==============================================================
 */
 
+#if Q2_ATOMIC
+struct PHYSFS_File;
+typedef struct PHYSFS_File* FS_FILE;
+#else
 typedef FILE* FS_FILE;
+#endif
 
 void	FS_InitFilesystem (void);
 void	FS_SetGamedir (char *dir);

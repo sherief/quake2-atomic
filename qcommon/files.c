@@ -108,6 +108,10 @@ int FS_filelength (FS_FILE f)
 	int		pos;
 	int		end;
 
+#if Q2_ATOMIC
+	return PHYSFS_fileLength (f);
+#endif
+
 	pos = ftell (f);
 	fseek (f, 0, SEEK_END);
 	end = ftell (f);
@@ -150,7 +154,11 @@ on files returned by FS_FOpenFile...
 */
 void FS_FCloseFile (FS_FILE f)
 {
+#if Q2_ATOMIC
+	PHYSFS_close (f);
+#else
 	fclose (f);
+#endif
 }
 
 
@@ -212,6 +220,15 @@ int FS_FOpenFile (char *filename, FS_FILE *file)
 	pack_t			*pak;
 	int				i;
 	filelink_t		*link;
+
+#if Q2_ATOMIC
+	PHYSFS_File* r;
+	r = PHYSFS_openRead (filename);
+	*file = r;
+	if (!r) 
+		return -1;
+	return PHYSFS_fileLength (r);
+#endif
 
 	file_from_pak = 0;
 
@@ -362,7 +379,11 @@ int FS_Read (void *buffer, int len, FS_FILE f)
 		block = remaining;
 		if (block > MAX_READ)
 			block = MAX_READ;
+#if Q2_ATOMIC
+		read = PHYSFS_readBytes (f, buf, block);
+#else
 		read = fread (buf, 1, block, f);
+#endif
 		if (read == 0)
 		{
 			// we might have been trying to read from a CD
@@ -536,6 +557,7 @@ void FS_AddGameDirectory (char *dir)
 	for (i=0; i<10; i++)
 	{
 		Com_sprintf (pakfile, sizeof(pakfile), "%s/pak%i.pak", dir, i);
+		PHYSFS_mount (pakfile, 0, 0);
 		pak = FS_LoadPackFile (pakfile);
 		if (!pak)
 			continue;
@@ -545,6 +567,7 @@ void FS_AddGameDirectory (char *dir)
 		fs_searchpaths = search;		
 	}
 
+	PHYSFS_mount (dir, 0, 0);
 
 }
 
