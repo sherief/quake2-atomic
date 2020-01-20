@@ -345,7 +345,7 @@ Properly handles partial reads
 */
 void CDAudio_Stop(void);
 #define	MAX_READ	0x10000		// read in blocks of 64k
-void FS_Read (void *buffer, int len, FS_FILE f)
+int FS_Read (void *buffer, int len, FS_FILE f)
 {
 	int		block, remaining;
 	int		read;
@@ -383,6 +383,7 @@ void FS_Read (void *buffer, int len, FS_FILE f)
 		remaining -= read;
 		buf += read;
 	}
+	return len - remaining;
 }
 
 /*
