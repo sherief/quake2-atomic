@@ -692,21 +692,23 @@ FILESYSTEM
 ==============================================================
 */
 
+typedef FILE* FS_FILE;
+
 void	FS_InitFilesystem (void);
 void	FS_SetGamedir (char *dir);
 char	*FS_Gamedir (void);
 char	*FS_NextPath (char *prevpath);
 void	FS_ExecAutoexec (void);
 
-int		FS_FOpenFile (char *filename, FILE **file);
-void	FS_FCloseFile (FILE *f);
+int		FS_FOpenFile (char *filename, FS_FILE *file);
+void	FS_FCloseFile (FS_FILE f);
 // note: this can't be called from another DLL, due to MS libc issues
 
 int		FS_LoadFile (char *path, void **buffer);
 // a null buffer will just return the file length without loading
 // a -1 length is not present
 
-void	FS_Read (void *buffer, int len, FILE *f);
+void	FS_Read (void *buffer, int len, FS_FILE f);
 // properly handles partial reads
 
 void	FS_FreeFile (void *buffer);

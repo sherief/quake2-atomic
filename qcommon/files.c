@@ -146,7 +146,7 @@ For some reason, other dll's can't just cal fclose()
 on files returned by FS_FOpenFile...
 ==============
 */
-void FS_FCloseFile (FILE *f)
+void FS_FCloseFile (FS_FILE f)
 {
 	fclose (f);
 }
@@ -203,7 +203,7 @@ a seperate file.
 */
 int file_from_pak = 0;
 #ifndef NO_ADDONS
-int FS_FOpenFile (char *filename, FILE **file)
+int FS_FOpenFile (char *filename, FS_FILE *file)
 {
 	searchpath_t	*search;
 	char			netpath[MAX_OSPATH];
@@ -343,7 +343,7 @@ Properly handles partial reads
 */
 void CDAudio_Stop(void);
 #define	MAX_READ	0x10000		// read in blocks of 64k
-void FS_Read (void *buffer, int len, FILE *f)
+void FS_Read (void *buffer, int len, FS_FILE f)
 {
 	int		block, remaining;
 	int		read;
