@@ -413,7 +413,7 @@ int FS_LoadFile (char *path, void **buffer)
 	
 	if (!buffer)
 	{
-		fclose (h);
+		FS_FCloseFile (h);
 		return len;
 	}
 
