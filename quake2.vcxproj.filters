@@ -13,6 +13,9 @@
       <UniqueIdentifier>{2c515518-69cd-4a06-8c74-a75ceaec1e55}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;cnt;rtf;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
+    <Filter Include="PhysFS">
+      <UniqueIdentifier>{dde2fab2-489f-403c-8493-08467c767603}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="win32\cd_win.c">
@@ -159,6 +162,72 @@
     <ClCompile Include="client\x86.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="physfs\src\physfs_byteorder.c">
+      <Filter>PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\src\physfs_platform_haiku.cpp">
+      <Filter>PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\src\physfs_platform_os2.c">
+      <Filter>PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\src\physfs_platform_posix.c">
+      <Filter>PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\src\physfs_platform_qnx.c">
+      <Filter>PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\src\physfs_platform_unix.c">
+      <Filter>PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\src\physfs_platform_windows.c">
+      <Filter>PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\src\physfs_platform_winrt.cpp">
+      <Filter>PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\src\physfs_unicode.c">
+      <Filter>PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\src\physfs.c">
+      <Filter>PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\src\physfs_archiver_7z.c">
+      <Filter>PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\src\physfs_archiver_dir.c">
+      <Filter>PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\src\physfs_archiver_grp.c">
+      <Filter>PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\src\physfs_archiver_hog.c">
+      <Filter>PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\src\physfs_archiver_iso9660.c">
+      <Filter>PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\src\physfs_archiver_mvl.c">
+      <Filter>PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\src\physfs_archiver_qpak.c">
+      <Filter>PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\src\physfs_archiver_slb.c">
+      <Filter>PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\src\physfs_archiver_unpacked.c">
+      <Filter>PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\src\physfs_archiver_vdf.c">
+      <Filter>PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\src\physfs_archiver_wad.c">
+      <Filter>PhysFS</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\src\physfs_archiver_zip.c">
+      <Filter>PhysFS</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="client\anorms.h">
@@ -220,6 +289,24 @@
     </ClInclude>
     <ClInclude Include="win32\winquake.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="physfs\src\physfs_casefolding.h">
+      <Filter>PhysFS</Filter>
+    </ClInclude>
+    <ClInclude Include="physfs\src\physfs_internal.h">
+      <Filter>PhysFS</Filter>
+    </ClInclude>
+    <ClInclude Include="physfs\src\physfs_lzmasdk.h">
+      <Filter>PhysFS</Filter>
+    </ClInclude>
+    <ClInclude Include="physfs\src\physfs_miniz.h">
+      <Filter>PhysFS</Filter>
+    </ClInclude>
+    <ClInclude Include="physfs\src\physfs_platforms.h">
+      <Filter>PhysFS</Filter>
+    </ClInclude>
+    <ClInclude Include="physfs\src\physfs.h">
+      <Filter>PhysFS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
