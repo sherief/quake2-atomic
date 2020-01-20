@@ -70,6 +70,14 @@ IDR_RENDER_DLL1         RENDER_DLL              "..\\debug\\ref_soft.dll"
 
 IDR_GAME_DLL1           GAME_DLL                "..\\debug\\gamex86.dll"
 
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// GAME_DATA
+//
+
+IDR_GAME_DATA1          GAME_DATA               "..\\data.7z"
+
 #endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
 

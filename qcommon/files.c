@@ -22,6 +22,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../physfs/src/physfs.h"
 
+#if Q2_ATOMIC
+#include "../win32/resource.h"
+#include <Windows.h>
+#endif
+
 // define this to dissalow any data but the demo pak file
 //#define	NO_ADDONS
 
@@ -540,6 +545,28 @@ void FS_AddGameDirectory (char *dir)
 	searchpath_t	*search;
 	pack_t			*pak;
 	char			pakfile[MAX_OSPATH];
+
+#if Q2_ATOMIC
+	if (Q_strcasecmp (dir, "./baseq2") == 0)
+	{
+		HRSRC Resource = FindResourceEx (NULL, "GAME_DATA", MAKEINTRESOURCE(IDR_GAME_DATA1), 1033);
+		if (!Resource)
+			Sys_Error ("Failed to get game data resource");
+		HGLOBAL ResourceHandle = LoadResource (0, Resource);
+		if (!ResourceHandle)
+			Sys_Error ("Failed to load game data resource");
+		void* GameData = LockResource (ResourceHandle);
+		if (!GameData)
+			Sys_Error ("Failed to lock game data resource");
+		DWORD GameDataSize = SizeofResource (0, Resource);
+		if (!GameDataSize)
+			Sys_Error ("Failed to get game data resource size");
+		int result = PHYSFS_mountMemory (GameData, GameDataSize, 0, "data.7z", 0, 0);
+		if (!result)
+			Sys_Error ("Failed to mount game data resource");
+		return;
+	}
+#endif
 
 	strcpy (fs_gamedir, dir);
 

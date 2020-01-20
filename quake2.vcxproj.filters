@@ -325,5 +325,6 @@
   <ItemGroup>
     <None Include="debug\ref_soft.dll" />
     <None Include="debug\gamex86.dll" />
+    <None Include="data.7z" />
   </ItemGroup>
 </Project>

@@ -528,6 +528,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="data.7z" />
     <None Include="debug\gamex86.dll" />
     <None Include="debug\ref_soft.dll" />
   </ItemGroup>
