@@ -503,7 +503,28 @@ void *Sys_GetGameAPI (void *parms)
 
 	// check the current debug directory first for development purposes
 	_getcwd (cwd, sizeof(cwd));
+#if Q2_ATOMIC
+	char Path[MAX_OSPATH];
+	GetTempPathA (MAX_OSPATH, Path);
+	HRSRC Resource = FindResourceEx (NULL, "GAME_DLL", MAKEINTRESOURCE(IDR_GAME_DLL1), 1033);
+	if(!Resource)
+		Sys_Error ("Failed to get game DLL resource");
+	HGLOBAL ResourceHandle = LoadResource (0, Resource);
+	if(!ResourceHandle)
+		Sys_Error ("Failed to load game DLL resource");
+	void* DLLData = LockResource (ResourceHandle);
+	if(!DLLData)
+		Sys_Error ("Failed to lock game DLL resource");
+	DWORD DLLSize = SizeofResource (0, Resource);
+	if(!DLLSize)
+		Sys_Error ("Failed to get game DLL resource size");
+	Com_sprintf (name, sizeof(name), "%s/%s", Path, "gamex86.dll");
+	FILE* f = fopen (name, "wb");
+	fwrite (DLLData, 1, DLLSize, f);
+	fclose (f);
+#else
 	Com_sprintf (name, sizeof(name), "%s/%s/%s", cwd, debugdir, gamename);
+#endif
 	game_library = LoadLibrary ( name );
 	if (game_library)
 	{

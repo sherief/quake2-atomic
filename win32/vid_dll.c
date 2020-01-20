@@ -25,6 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "..\client\client.h"
 #include "winquake.h"
+#include "resource.h"
 //#include "zmouse.h"
 
 // Structure containing functions exported from refresh DLL
@@ -565,6 +566,29 @@ qboolean VID_LoadRefresh( char *name )
 		re.Shutdown();
 		VID_FreeReflib ();
 	}
+
+#if Q2_ATOMIC
+	char Path[MAX_OSPATH];
+	GetTempPathA (MAX_OSPATH, Path);
+	HRSRC Resource = FindResourceEx (NULL, "RENDER_DLL", MAKEINTRESOURCE(IDR_RENDER_DLL1), 1033);
+	if(!Resource)
+		Sys_Error ("Failed to get render DLL resource");
+	HGLOBAL ResourceHandle = LoadResource (0, Resource);
+	if(!ResourceHandle)
+		Sys_Error ("Failed to load render DLL resource");
+	void* DLLData = LockResource (ResourceHandle);
+	if(!DLLData)
+		Sys_Error ("Failed to lock render DLL resource");
+	DWORD DLLSize = SizeofResource (0, Resource);
+	if(!DLLSize)
+		Sys_Error ("Failed to get render DLL resource size");
+	char DLLPath[MAX_OSPATH];
+	Com_sprintf (DLLPath, sizeof(DLLPath), "%s/%s", Path, name);
+	FILE* f = fopen (DLLPath, "wb");
+	fwrite (DLLData, 1, DLLSize, f);
+	fclose (f);
+	name = DLLPath;
+#endif
 
 	Com_Printf( "------- Loading %s -------\n", name );
 

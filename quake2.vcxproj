@@ -499,6 +499,7 @@
     <ClInclude Include="qcommon\qfiles.h" />
     <ClInclude Include="server\server.h" />
     <ClInclude Include="win32\conproc.h" />
+    <ClInclude Include="win32\resource.h" />
     <ClInclude Include="win32\winquake.h" />
   </ItemGroup>
   <ItemGroup>
@@ -525,6 +526,10 @@
       <Project>{75f130bc-7edb-45a0-a101-4b2905081e10}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="debug\gamex86.dll" />
+    <None Include="debug\ref_soft.dll" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
