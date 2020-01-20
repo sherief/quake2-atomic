@@ -20,6 +20,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "qcommon.h"
 
+#include "../physfs/src/physfs.h"
+
 // define this to dissalow any data but the demo pak file
 //#define	NO_ADDONS
 
@@ -843,6 +845,11 @@ FS_InitFilesystem
 */
 void FS_InitFilesystem (void)
 {
+	if (!PHYSFS_init(0))
+	{
+		Sys_Error ("Couldn't initialize PhysFS");
+	}
+
 	Cmd_AddCommand ("path", FS_Path_f);
 	Cmd_AddCommand ("link", FS_Link_f);
 	Cmd_AddCommand ("dir", FS_Dir_f );

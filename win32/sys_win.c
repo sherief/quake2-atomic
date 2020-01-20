@@ -254,11 +254,6 @@ void Sys_Init (void)
 		// let QHOST hook in
 		InitConProc (argc, argv);
 	}
-
-	if (!PHYSFS_init(0))
-	{
-		Sys_Error ("Couldn't initialize PhysFS");
-	}
 }
 
 
