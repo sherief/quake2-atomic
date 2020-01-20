@@ -101,7 +101,7 @@ The "game directory" is the first tree on the search path and directory that all
 FS_filelength
 ================
 */
-int FS_filelength (FILE *f)
+int FS_filelength (FS_FILE f)
 {
 	int		pos;
 	int		end;
@@ -196,7 +196,7 @@ int	Developer_searchpath (int who)
 FS_FOpenFile
 
 Finds the file in the search path.
-returns filesize and an open FILE *
+returns filesize and an open FS_FILE
 Used for streaming data out of either a pak file or
 a seperate file.
 ===========
